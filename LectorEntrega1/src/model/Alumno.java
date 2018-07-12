@@ -3,8 +3,6 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Repositories.AsignacionesRepository;
-
 import org.uqbar.commons.model.Entity;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.commons.utils.Transactional;
@@ -60,14 +58,17 @@ public class Alumno extends Entity {
 		this.legajo = legajo2;
 	}
 
-	public void agregarAsignacion(Asignacion unaAsig) {
-		AsignacionesRepository.getInstance().agregar(unaAsig);
+		public void  cursarAsignacion(Asignacion unaAsig)
+	{
+		this.asignaciones.add(unaAsig);
 	}
 	
-	public void limpiarAsignaciones()
-	{
-   this.asignaciones.removeAll(getAsignaciones());
+	
+	public void setAsignaciones(List<Asignacion> unaAsig) {
+		this.asignaciones = unaAsig;
 	}
+	
+
 
 
 	public List<Asignacion> getAsignaciones() {
