@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Repositories.AlumnosRepository;
-import model.Repositories.AsignacionesRepository;
 import model.tipoNota.Conceptual;
 import model.tipoNota.EnumConceptual;
 import model.tipoNota.Numerica;
@@ -17,8 +16,9 @@ public class CargadorAlumnos {
 		//cargo alumnos
 		Alumno axel = new Alumno("Axel", "Fulop", 1526297, "AxelF");
 		Alumno lucas = new Alumno("Lucas", "Mirabal", 1432228, "LucasM");
-
-		AlumnosRepository docente = new AlumnosRepository();
+        
+		//Se agregan al repo
+		 AlumnosRepository docente = new AlumnosRepository();
 		 docente.getInstance().agregar(axel);
 		 docente.getInstance().agregar(lucas);
 		
@@ -31,31 +31,32 @@ public class CargadorAlumnos {
 		
 		
 		//cargo notas conceptuales
-		TP discretaTp = new TP("Entrega 0");
+		TP discretaTp = new TP("Algebra Bool");
 		discretaTp.calificar(new Conceptual(EnumConceptual.MAL));
 		TP ddsTp = new TP("Entrega Arena");
 		ddsTp.calificar((new Conceptual(EnumConceptual.BIEN)));
 		
-		List<Tarea> listaDiscreta = new ArrayList<Tarea>();
-		listaDiscreta.add(discretaParcial);
-		listaDiscreta.add(ddsParcial);
-		listaDiscreta.add(discretaTp); 
-		listaDiscreta.add(ddsTp);
+		//Creo la lista de tareas
+		List<Tarea> tareasDiscreta = new ArrayList<Tarea>();
+		tareasDiscreta.add(discretaParcial);
+		tareasDiscreta.add(ddsParcial);
+		tareasDiscreta.add(discretaTp); 
+		tareasDiscreta.add(ddsTp);
 		
-		List<Tarea> listaPdeP = new ArrayList<Tarea>();
-		listaPdeP.add(discretaParcial);
-		listaPdeP.add(ddsTp);
+		List<Tarea> tareasDDS = new ArrayList<Tarea>();
+		tareasDDS.add(ddsParcial);
+		tareasDDS.add(ddsTp);
 		
-		Asignacion MatDisc = new Asignacion(listaDiscreta,"Mat Disc");
-		Asignacion PdeP = new Asignacion(listaPdeP,"PdeP");
+		Asignacion MatDisc = new Asignacion(tareasDiscreta,"Mat Disc");
+		Asignacion DDS = new Asignacion(tareasDDS ,"DDS");
 		
 		
 		//
-		axel.agregarAsignacion(MatDisc);
-		axel.agregarAsignacion(PdeP);
+		axel.cursarAsignacion(MatDisc);
+		axel.cursarAsignacion(DDS);
 		
-		lucas.agregarAsignacion(MatDisc);
-		lucas.agregarAsignacion(PdeP);
+		lucas.cursarAsignacion(MatDisc);
+		lucas.cursarAsignacion(DDS);
 	
 	}
 
